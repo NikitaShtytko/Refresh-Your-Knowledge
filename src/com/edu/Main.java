@@ -64,8 +64,32 @@ public class Main {
         System.out.println("");
     }
 
+    public static void classesAndObjects(){
+        class Car{
+
+            public String name;
+            public float speed;
+
+            Car(String call, int x){
+                name = call;
+                speed = x;
+            }
+
+            float time(float distance){
+                return distance / speed;
+            }
+        }
+
+        Car audi = new Car("Audi", 220);
+        System.out.println(audi.name + " spend " + audi.time(500) + " hours to travel for 500 km");
+
+        Car mclaren = new Car("Mclaren", 325);
+        System.out.println(mclaren.name + " spend " + mclaren.time(500) + " hours to travel for 500 km");
+    }
+
     public static void main(String[] args) {
 //        ifElse();
 //        forEach();
+//        classesAndObjects();
     }
 }
