@@ -1,13 +1,21 @@
 package com.edu;
 
-//        Среда программирования (Jet brains IDEA , Visual Studio, Pycharm и т.п): Debug Mode, Watch Expressions.
-//        Условные выражения, циклы, синтаксические конструкции
-//        Объекты и классы: назначение и примеры использования
-//        Наследование: назначение и примеры использования
-//        Интерфейсы и абстрактные классы (если поддерживается в языке программирования, которым вы владеете): назначение и примеры использования
-//        Исключения и их обработка: назначение и примеры использования
-//        Работа с файлами: создание, запись, чтение, удаление
+//+        Среда программирования (Jet brains IDEA , Visual Studio, Pycharm и т.п): Debug Mode, Watch Expressions.
+//+        Условные выражения, циклы, синтаксические конструкции
+//+        Объекты и классы: назначение и примеры использования
+//+        Наследование: назначение и примеры использования
+//+        Интерфейсы и абстрактные классы (если поддерживается в языке программирования, которым вы владеете): назначение и примеры использования
+//+        Исключения и их обработка: назначение и примеры использования
+//+        Работа с файлами: создание, запись, чтение, удаление
 //        Коллекции: назначение и примеры использования
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.util.Set;
+
+import static java.lang.Math.sqrt;
 
 public class Main {
 
@@ -87,9 +95,158 @@ public class Main {
         System.out.println(mclaren.name + " spend " + mclaren.time(500) + " hours to travel for 500 km");
     }
 
-    public static void main(String[] args) {
+    public static void Collections(){
+
+    }
+
+    public static void Inheritance(){
+
+        class Shape{
+            int x;
+
+            Shape(int a){
+                x = a;
+            }
+            void Area(){
+                System.out.println("This is base figure " + x);
+            }
+            void Area(int a){
+                System.out.println("This is base figure " + a);
+            }
+        }
+
+        class Square extends Shape{
+            int x;
+            Square(int a) {
+                super(a);
+                x = a;
+            }
+            @Override
+            void Area(){
+                System.out.println(x*x);
+            }
+        }
+
+        class Triangle extends Shape{
+            int x;
+            Triangle(int a) {
+                super(a);
+                x = a;
+            }
+            @Override
+            void Area(){
+                System.out.println( x*x / 4 * sqrt(3));
+            }
+        }
+
+        class Circle extends Shape{
+            int x;
+            Circle(int a) {
+                super(a);
+                x = a;
+            }
+            @Override
+            void Area(){
+                System.out.println(3.14 * x * x);
+            }
+        }
+
+//        class Ex extends Circle, Square{} //Пример множественного наследования
+
+        Shape one = new Shape(3);
+        one.Area();
+
+        Shape two = new Triangle(3); //наоборот будет ошибка ( Triangle two = new Shape )
+        two.Area();
+
+        Triangle three = new Triangle(3);
+        three.Area();
+
+        Square four = new Square(3);
+        four.Area();
+
+        Circle five = new Circle(3);
+        five.Area();
+        five.Area(4); //такого метода нет в классе, поэтому используется родительский
+    }
+
+    public static void InterfacesAndAbstracts(){
+        //интерфейс работает с поведением а не с состоянием => нет состояния только методы
+        //интерйесы нужны для связывания вещей по их поведению, но не имеющих больше ничего общего
+        //абстрактные классы имеют как состояние так и поведение поэтому связывают схожие вещи
+        //Абстрактный класс может не иметь реализации всех методов => абстрактный метод - метод без реализации (только сигнатура)
+        //extends - наследование (для абстракт и обычных), implements - реализация (для наследования от интерфейсов)
+        //Классы могут реализовывать сколько угодно интерфейсов, но наследоваться можно только от одного класса.
+
+        abstract class A{
+            int a;
+            void Setter(int x){
+                a = x;
+            }
+            void Getter(){
+                System.out.println(a);
+            }
+        }
+
+//        A a = new A(); 'A' is abstract; cannot be instantiated
+    }
+
+    public static void Exceptions() throws Exception{
+        Scanner in = new Scanner(System.in);
+        int x = 0;
+        try {
+            x = in.nextInt();
+        }
+        catch (Exception e){
+            System.out.println("Error");
+            if(e.getMessage() == null){
+                throw new Exception("Your number is 123.0");
+            }
+        }
+        finally {
+            in.close();
+        }
+    }
+
+    public static void Files() throws Throwable{
+        File test = new File("D://Projects//ОсвежаемЗнания//src//com//edu//test");
+        System.out.println(test.mkdir());
+
+        //false для перезаписи, true для записи в конец
+        FileWriter textWrite = new FileWriter(test.getAbsolutePath() + "//text.txt", false);
+
+        textWrite.write("Хокку любит \nТренировки нужно пропускать \nРади проги )))\n");
+        textWrite.close();
+
+        FileReader textRead = new FileReader(test.getAbsolutePath() + "//text.txt");
+        Scanner scanReader = new Scanner(textRead);
+        while (scanReader.hasNextLine()){
+            System.out.println(scanReader.nextLine());
+        }
+        textRead.close(); scanReader.close();
+
+        try {
+            File text = new File(test.getAbsolutePath() + "//text.txt");
+            boolean markText = text.delete();
+            boolean markTest = test.delete();
+            System.out.println("Delete file");
+            if(!(markTest && markText)){
+                throw new Exception("Error when delete");
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws Throwable{
 //        ifElse();
-        forEach();
+//        forEach();
 //        classesAndObjects();
+//        Files();
+//        Exceptions();
+//        Inheritance();
+//        InterfacesAndAbstracts();
+        Collections();
     }
 }
