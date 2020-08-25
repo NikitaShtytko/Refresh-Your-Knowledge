@@ -12,8 +12,7 @@ package com.edu;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.Math.sqrt;
 
@@ -96,7 +95,26 @@ public class Main {
     }
 
     public static void Collections(){
+        int[] mass = {1, 2, 8, 3, 5, 10, 1, 2, 3, 4};
+        LinkedHashSet<Integer> x = new LinkedHashSet<Integer>();
+        TreeSet<Integer> xi = new TreeSet<Integer>();
+        Map<Integer, Integer> y = new HashMap<>();
+        ArrayList<Integer> z = new ArrayList<>();
+        LinkedList<Integer> zi = new LinkedList<>();
 
+        for (int i = 0; i < mass.length; i++) {
+            x.add(mass[i]);
+            xi.add(mass[i]);
+            y.put(i, mass[i]);
+            z.add(mass[i]);
+            zi.add(mass[i]);
+        }
+
+        System.out.println(x);
+        System.out.println(xi);
+        System.out.println(y);
+        System.out.println(z);
+        System.out.println(zi);
     }
 
     public static void Inheritance(){
